@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Syne', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --neon: #00FFB2;
+  --plasma: #FF2D6B;
+  --aurora: #7B2FFF;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0A0A0F;
+  color: #E8F4FF;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom Cursor */
+.cursor {
+  width: 12px;
+  height: 12px;
+  background: var(--neon);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(0, 255, 178, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease;
+  transform: translate(-50%, -50%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0F;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon);
+  border-radius: 2px;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Neon glow effects */
+.neon-text {
+  color: var(--neon);
+  text-shadow: 0 0 20px rgba(0, 255, 178, 0.8), 0 0 40px rgba(0, 255, 178, 0.4);
+}
+
+.neon-border {
+  border-color: var(--neon);
+  box-shadow: 0 0 15px rgba(0, 255, 178, 0.3), inset 0 0 15px rgba(0, 255, 178, 0.05);
+}
+
+/* Gradient backgrounds */
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(123, 47, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 255, 178, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(255, 45, 107, 0.1) 0%, transparent 50%),
+    #0A0A0F;
+}
+
+/* Upload zone */
+.upload-zone {
+  border: 2px dashed rgba(0, 255, 178, 0.3);
+  transition: all 0.3s ease;
+  background: rgba(0, 255, 178, 0.02);
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: rgba(0, 255, 178, 0.7);
+  background: rgba(0, 255, 178, 0.06);
+  box-shadow: 0 0 30px rgba(0, 255, 178, 0.15);
+}
+
+/* Shimmer loading */
+.shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.0) 0%,
+    rgba(0,255,178,0.08) 50%,
+    rgba(255,255,255,0.0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Scan line effect */
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  opacity: 0.6;
+  animation: scan 2.5s linear infinite;
+}
+
+/* Progress bar neon */
+.progress-neon {
+  background: linear-gradient(90deg, var(--aurora), var(--neon));
+  box-shadow: 0 0 15px rgba(0, 255, 178, 0.6);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon) 0%, #00D4A0 100%);
+  color: #0A0A0F;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 178, 0.6), 0 10px 30px rgba(0, 255, 178, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Grid noise overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Image comparison slider */
+.comparison-container {
+  position: relative;
+  overflow: hidden;
+  cursor: col-resize;
+  user-select: none;
+}
+
+.comparison-slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--neon);
+  box-shadow: 0 0 15px rgba(0, 255, 178, 0.8);
+  cursor: col-resize;
+  z-index: 10;
+}
+
+.comparison-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 20px rgba(0, 255, 178, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0A0A0F;
+}
+
+/* Tag badge */
+.tag-badge {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes gridFloat {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.06; }
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0,255,178,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,178,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridFloat 4s ease-in-out infinite;
+}
+
+/* Result card glow */
+.result-glow {
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 178, 0.2),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 80px rgba(0, 255, 178, 0.08);
+}
+
+/* Face detection overlay animation */
+@keyframes cornerPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
